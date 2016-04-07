@@ -1,0 +1,22 @@
+{
+  "name": "pictureisworth",
+  "description": "App telling you the true value of your pictures.",
+  "main": "app.js",
+  "authors": [
+    "Samuel Davidson <samdamana> Elliot Hatch <neurotischism>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/Fresh4Less/pictureisworth",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.3"
+  }
+}

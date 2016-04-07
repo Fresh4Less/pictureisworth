@@ -1,0 +1,23 @@
+{
+  "name": "pictureisworth",
+  "version": "0.1.0",
+  "description": "App telling you the true value of your pictures.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fresh4Less/pictureisworth.git"
+  },
+  "author": "Samuel Davidson <samdamana> Elliot Hatch <neurotischism>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Fresh4Less/pictureisworth/issues"
+  },
+  "homepage": "https://github.com/Fresh4Less/pictureisworth#readme",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}

@@ -1,0 +1,19 @@
+body {
+    background-color: #666;
+    font-family: 'Lato', sans-serif;
+}
+#title {
+    color:white;
+    text-align: center;
+    font-size: 5em;
+}
+#title span {
+    font-weight: 300;
+}
+#someImage {
+    font-size: 2em;
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    transform: TranslateX(-50%);
+}
