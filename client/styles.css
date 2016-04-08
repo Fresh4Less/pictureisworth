@@ -17,3 +17,23 @@ body {
     left: 50%;
     transform: TranslateX(-50%);
 }
+
+.spincounter {
+	display: inline-block;
+	overflow: hidden;
+	height: 0.8em;
+
+}
+
+.spincounter .placeholder {
+	position: relative;
+	visibility: hidden;
+}
+
+.spincounter .spinner {
+	visibility: visible;
+	line-height: 80%;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}
