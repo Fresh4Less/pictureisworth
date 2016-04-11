@@ -18,6 +18,9 @@
   },
   "homepage": "https://github.com/Fresh4Less/pictureisworth#readme",
   "dependencies": {
-    "express": "^4.13.4"
+    "express": "^4.13.4",
+    "grunt": "^1.0.1",
+    "grunt-sass": "^1.1.0",
+    "node.normalize.scss": "^3.0.3"
   }
 }
