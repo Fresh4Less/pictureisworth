@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Picture is Worth</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href='https://fonts.googleapis.com/css?family=Lato:400,100' rel='stylesheet' type='text/css'>
-
-    <script src="angular/angular.min.js"></script>
-    <script src="pictureisworth.js"></script>
-</head>
-<body ng-app="pictureisworth" ng-controller="RootController">
-	<div id="title">A Picture is Worth <spincounter count="10" digits="4"></spincounter> Words</div>
-    <div id="someImage" style="color: {{imgColor}}">Some Image {{imgCount}}</div>
-</body>
+	<head>
+		<meta charset="UTF-8">
+		<title>Picture is Worth</title>
+		<link rel="stylesheet" href="styles.css">
+		<link href='https://fonts.googleapis.com/css?family=Lato:400,100' rel='stylesheet' type='text/css'>
+	</head>
+	<body ng-app="pictureisworth" ng-controller="RootController">
+		<div id="title">A Picture is Worth <span class="spincounter" data-digits="4" data-value="" data-random="true"></span> Words</div>
+		<div id="someImage" style="color: {{imgColor}}">Some Image {{imgCount}}</div>
+		<form method="post" enctype="multipart/form-data" action="/api/evaluate">
+			<input type="file" name="file">
+			<input type="submit" value="Submit">
+		</form>
+		<script src="pictureisworth.js"></script>
+	</body>
 </html>

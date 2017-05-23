@@ -18,6 +18,14 @@
   },
   "homepage": "https://github.com/Fresh4Less/pictureisworth#readme",
   "dependencies": {
-    "express": "^4.13.4"
+    "bluebird": "^3.5.0",
+    "body-parser": "^1.17.1",
+    "busboy": "^0.2.14",
+    "compression": "^1.6.2",
+    "config": "^1.25.1",
+    "express": "^4.15.2",
+    "jimp": "^0.2.28",
+    "minimist": "^1.2.0",
+    "safe-json-stringify": "^1.0.4"
   }
 }

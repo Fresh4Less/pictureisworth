@@ -1,55 +1,58 @@
-/*Samuel Davidson | Elliot Hatch */
-app = angular.module('pictureisworth',[]);
+(function(window, document) {
+	var spincounters = document.getElementsByClassName('spincounter');
+	for(var i = 0; i < spincounters.length; i++) {
+		initializeSpincounter(spincounters[i]);
+	}
 
-app.controller('RootController', function($scope, $interval) {
-    $scope.wordCount = 1000;
-    $scope.imgCount = 1;
-    $scope.imgColor = '#fff';
+	var randomChangeInterval = setInterval(function() {
+		for(var i = 0; i < spincounters.length; i++) {
+			var spincounter = spincounters[i];
+			if(spincounter.getAttribute('data-random')) {
+				//setSpincounter(spincounter, getRandomInt(50, 2500));
+			}
+		}
+	}, 2000);
 
-    $interval(function() {
-        $scope.wordCount = getRandomInt(50, 1200);
-        $scope.imgCount++;
-        $scope.imgColor = '#'+Math.floor(Math.random()*16777215).toString(16);
-    }, 2000);
-});
+function initializeSpincounter(element) {
+	var digits = element.getAttribute('data-digits') || 2;
+	for(var i = 0; i < digits; i++) {
+		var digitElement = document.createElement('span');
+		digitElement.appendChild(document.createTextNode('0'));
+		digitElement.classList.add('placeholder');
 
-app.directive('spincounter', function($interval) {
-    function link(scope, element, attrs) {
-        scope.$watch(attrs.digits, function(val) {
-            var outer = angular.element('<span></span>');
-            outer.addClass('spincounter');
-            for(var i = 0; i < attrs.digits; i++) {
-                var inner = angular.element('<span></span>');
-                inner.addClass('placeholder');
-                inner.text('0');
-                var spinner = angular.element('<span></span>');
-                spinner.addClass('spinner');
-                spinner.html(['0','1','2','3','4','5','6','7','8','9'].join('</br>'));
-                spinner.css('top', '0px');
-                inner.append(spinner);
-                outer.append(inner);
-                //TODO: remove this and do actual animation
-                (function(s) {
-                $interval(function() {
-                    s.css('top', (parseFloat(s.css('top'), 10) - 1) + 'px');
-                }, 1/60)})(spinner);
-            }
-            element.append(outer);
-        });
-        scope.$watch(attrs.count, function(val) {
-        });
-    }
-    return {
-        restrict: 'E',
-        scope: {
-            count: '='
-        },
-        link: link
-    };
-});
+		var spinner = document.createElement('span');
+		spinner.classList.add('spinner');
+		spinner.innerHTML = ['0','1','2','3','4','5','6','7','8','9'].join('</br>');
+		//spinner.appendChild(document.createTextNode(['0','1','2','3','4','5','6','7','8','9'].join('</br>')));
+		spinner.style.top = '0px';
+
+		digitElement.appendChild(spinner);
+		element.appendChild(digitElement);
+	}
+
+	var value = element.getAttribute('data-value');
+	if(!value && value !== 0) {
+		value = 0;
+	}
+
+	setSpincounter(element, value);
+}
+
+function setSpincounter(spincounter, count) {
+	var digits = spincounter.getAttribute('data-digits') || 2;
+	for(var i = 0; i < digits; i++) {
+		var spinner = spincounter.children[i].children[0];
+		//TODO: remove this and do actual animation
+		(function(s) {
+			setInterval(function() {
+				s.style.top = (parseFloat(s.style.top, 10) - 1) + 'px';
+			}, 1/60);
+		})(spinner);
+	}
+}
 
 // Returns a random integer between min (included) and max (excluded)
-// Using Math.round() will give you a non-uniform distribution!
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
+})(window, document)
