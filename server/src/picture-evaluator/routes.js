@@ -29,6 +29,9 @@ module.exports = function(options) {
 			});
 			file.on('end', function() {
 				var data = Buffer.concat(fileBuffers);
+				if(data.length === 0) {
+					return res.status(400).send('You must upload an image');
+				}
 				Jimp.read(data)
 				.then(function(image) {
 					//read the file, rewrite it as jpeg with fixed quality, report the image size

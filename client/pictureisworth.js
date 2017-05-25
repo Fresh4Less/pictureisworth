@@ -1,58 +1,72 @@
 (function(window, document) {
-	var spincounters = document.getElementsByClassName('spincounter');
-	for(var i = 0; i < spincounters.length; i++) {
-		initializeSpincounter(spincounters[i]);
-	}
+	$(document).ready(function() {
+		$('#image-upload-form').submit(function(event) {
+			event.preventDefault();
+			var formData = new FormData($(this)[0])
+			$.ajax({
+				type: "POST",
+				url: "/api/evaluate",
+				data: formData,
+				contentType: false,
+				processData: false
+			}).done(function(data) {
+				console.log(data);
+			}).fail(function(data) {
+				console.error(data.responseText);
+			});
+		});
 
-	var randomChangeInterval = setInterval(function() {
-		for(var i = 0; i < spincounters.length; i++) {
-			var spincounter = spincounters[i];
-			if(spincounter.getAttribute('data-random')) {
-				//setSpincounter(spincounter, getRandomInt(50, 2500));
-			}
+		$('.spincounter').each(initializeSpincounter);
+
+		var randomChangeInterval = setInterval(function() {
+			$('.spincounter').each(function() {
+				if($(this).attr('data-random')) {
+					//setSpincounter(spincounter, getRandomInt(50, 2500));
+				}
+			});
+		}, 2000);
+
+	function initializeSpincounter() {
+		var element = $(this);
+		var digits = element.attr('data-digits') || 2;
+		for(var i = 0; i < digits; i++) {
+			element.append(
+				$('<span></span>')
+					.addClass('placeholder')
+					.text('0')
+					.append(
+				$('<span></span>')
+					.addClass('spinner')
+					.html(['0','1','2','3','4','5','6','7','8','9'].join('</br>'))
+					.css('top', '0px')
+				));
 		}
-	}, 2000);
 
-function initializeSpincounter(element) {
-	var digits = element.getAttribute('data-digits') || 2;
-	for(var i = 0; i < digits; i++) {
-		var digitElement = document.createElement('span');
-		digitElement.appendChild(document.createTextNode('0'));
-		digitElement.classList.add('placeholder');
+		var value = element.attr('data-value');
+		if(value === undefined) {
+			value = 0;
+		}
 
-		var spinner = document.createElement('span');
-		spinner.classList.add('spinner');
-		spinner.innerHTML = ['0','1','2','3','4','5','6','7','8','9'].join('</br>');
-		//spinner.appendChild(document.createTextNode(['0','1','2','3','4','5','6','7','8','9'].join('</br>')));
-		spinner.style.top = '0px';
-
-		digitElement.appendChild(spinner);
-		element.appendChild(digitElement);
+		setSpincounter.call(element[0], value);
 	}
 
-	var value = element.getAttribute('data-value');
-	if(!value && value !== 0) {
-		value = 0;
+	function setSpincounter(count) {
+		var element = $(this);
+		var digits = element.attr('data-digits') || 2;
+		for(var i = 0; i < digits; i++) {
+			var spinner = element.children().eq(i).children().first();
+			//TODO: remove this and do actual animation
+			(function(s) {
+				setInterval(function() {
+					s.css('top', (parseFloat(s.css('top'), 10) - 1) + 'px');
+				}, 1/60);
+			})(spinner);
+		}
 	}
 
-	setSpincounter(element, value);
-}
-
-function setSpincounter(spincounter, count) {
-	var digits = spincounter.getAttribute('data-digits') || 2;
-	for(var i = 0; i < digits; i++) {
-		var spinner = spincounter.children[i].children[0];
-		//TODO: remove this and do actual animation
-		(function(s) {
-			setInterval(function() {
-				s.style.top = (parseFloat(s.style.top, 10) - 1) + 'px';
-			}, 1/60);
-		})(spinner);
+	// Returns a random integer between min (included) and max (excluded)
+	function getRandomInt(min, max) {
+		return Math.floor(Math.random() * (max - min)) + min;
 	}
-}
-
-// Returns a random integer between min (included) and max (excluded)
-function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
-}
+	});
 })(window, document)
