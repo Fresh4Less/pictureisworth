@@ -11,7 +11,7 @@
 			crossorigin="anonymous"></script>
 	</head>
 	<body ng-app="pictureisworth" ng-controller="RootController">
-		<div id="title">A Picture is Worth <span class="spincounter" data-digits="4" data-value="" data-random="true"></span> Words</div>
+		<div id="title">A Picture is Worth <span class="spincounter" data-digits="4" data-value="1000" data-random="true"></span> Words</div>
 		<div id="someImage" style="color: {{imgColor}}">Some Image {{imgCount}}</div>
 		<form id="image-upload-form" method="post" enctype="multipart/form-data" action="/api/evaluate">
 			<input type="file" name="file">
