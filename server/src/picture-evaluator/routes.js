@@ -38,7 +38,7 @@ module.exports = function(options) {
 					image.quality(imageQuality);
 					return Promise.promisify(image.getBuffer, {context: image})(Jimp.MIME_JPEG);
 				}).then(function(buffer) {
-					res.status(200).send('' + buffer.length);
+					res.status(200).send('' + bytesToWordCount(buffer.length));
 				}).catch(function(err) {
 					res.status(400).send('Failed to read image: ' + err.message);
 				});
@@ -52,4 +52,8 @@ module.exports = function(options) {
 	});
 
 	return router;
+}
+
+function bytesToWordCount(bytes) {
+	return Math.floor(10*Math.pow(bytes, 1/2));
 }
