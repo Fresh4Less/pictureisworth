@@ -1,7 +1,58 @@
+html {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	box-sizing: border-box;
+}
+
+*,*:before,*:after {
+  box-sizing: inherit;
+}
+
 body {
 	background-color: #666;
 	color:white;
 	font-family: 'Lato', sans-serif;
+	margin: 0;
+	height: 100%;
+}
+
+#wrapper {
+	min-height: 100%;
+	position: relative;
+	padding-top: 1px;
+}
+
+footer {
+	position: absolute;
+	height: 25px;
+	bottom: 0px;
+	left: 0px; 
+	right: 0px;
+	text-align: center;
+
+	background-color: #444444;
+}
+
+a {
+	color: #dddddd;
+}
+
+footer ul {
+	margin: 0;
+	padding: 0;
+	top: 50%;
+	vertical-align: middle;
+}
+
+footer ul li {
+	list-style-type: none;
+	display: inline;
+}
+
+footer li:not(:first-child):before {
+	content: " | ";
+	margin: 10px;
 }
 
 .content-wrap {
@@ -9,18 +60,20 @@ body {
 	margin: 0 auto;
 }
 
-.image-display {
-	text-align: center;
-}
-
-
 #title {
 	text-align: center;
 	font-size: 5em;
+	margin-top: 40px;
+	margin-bottom: 20px;
 }
-#title span {
-	font-weight: 300;
+
+#subtitle {
+	text-align: center;
+	font-size: 2em;
+	margin-top: 20px;
+	margin-bottom: 10px;
 }
+
 #someImage {
 	font-size: 2em;
 	position:absolute;
@@ -47,6 +100,7 @@ body {
 	position: absolute;
 	left: 0px;
 	top: 0px;
+	font-weight: 400;
 
 	transition: top 1.5s ease-out;
 }
@@ -55,32 +109,51 @@ body {
 	transition: none !important;
 }
 
-#image-preview {
-	height: 500px;
+.image-display {
+	text-align: center;
+}
+
+.image-preview-outer {
+	height: 30vh;
+	max-height: 500px;
 	width: auto;
+	margin: 0 auto;
+	overflow: visible;
+}
+
+.image-preview-inner {
+	position: relative;
+	float: right;
+	right: 50%;
+}
+
+#image-preview {
+	position: relative;
+	right: -50%;
+	height: 30vh;
+	max-height: 500px;
 }
 
 #image-word-count {
-	font-size: 5em;
-	font-weight: 300;
+	font-size: 7em;
 }
 
 #image-input {
-    width: 0.1px;
-    height: 0.1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1;
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
 }
 
 #image-submit {
-    width: 0.1px;
-    height: 0.1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1;
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
 }
 
 #image-submit + label {
@@ -88,50 +161,55 @@ body {
 }
 
 #image-upload-form input + label {
-    max-width: 80%;
-    font-size: 1.25rem;
-    /* 20px */
-    font-weight: 700;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    cursor: pointer;
-    display: inline-block;
-    overflow: hidden;
-    padding: 0.625rem 1.25rem;
-    /* 10px 20px */
+	display: block;
+	width: 200px;
+	margin: 10px auto;
+
+	font-size: 1.25rem;
+	/* 20px */
+	font-weight: 700;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	cursor: pointer;
+	overflow: hidden;
+	padding: 0.625rem 1.25rem;
+	/* 10px 20px */
 }
 
 #image-upload-form input:focus + label {
-    outline: 1px dotted #000;
-    outline: -webkit-focus-ring-color auto 5px;
+	outline: 1px dotted #000;
+	outline: -webkit-focus-ring-color auto 5px;
 }
 
 #image-upload-form input + label svg {
-    width: 1em;
-    height: 1em;
-    vertical-align: middle;
-    fill: currentColor;
-    margin-top: -0.25em;
-    /* 4px */
-    margin-right: 0.25em;
-    /* 4px */
+	width: 1em;
+	height: 1em;
+	vertical-align: middle;
+	fill: currentColor;
+	margin-top: -0.25em;
+	/* 4px */
+	margin-right: 0.25em;
+	/* 4px */
 }
 
 #image-upload-form input + label {
-    color: #f1e5e6;
-    background-color: #d3394c;
+	color: #f1e5e6;
+	background-color: #d3394c;
 }
 
 #image-upload-form input:focus + label,
 #image-upload-form input + label:hover {
-    background-color: #722040;
+	background-color: #722040;
 }
 
 #image-input + label {
-    color: #111111 !important;
-    background-color: white !important;
+	color: #111111 !important;
+	background-color: white !important;
 }
 
 #image-input:hover + label {
-    background-color: #dddddd !important;
+	background-color: #dddddd !important;
+}
+
+#image-upload-error {
 }

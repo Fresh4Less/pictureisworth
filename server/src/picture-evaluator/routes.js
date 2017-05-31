@@ -28,20 +28,28 @@ module.exports = function(options) {
 				fileBuffers.push(data);
 			});
 			file.on('end', function() {
-				var data = Buffer.concat(fileBuffers);
-				if(data.length === 0) {
-					return res.status(400).send('You must upload an image');
+				try {
+					var data = Buffer.concat(fileBuffers);
+					if(data.length === 0) {
+						return res.status(400).send('You must upload an image');
+					}
+					Jimp.read(data)
+					.then(function(image) {
+						//read the file, rewrite it as jpeg with fixed quality, report the image size
+						if(!image) {
+							throw new Error('Failed to read image');
+						}
+						image.quality(imageQuality);
+						return Promise.promisify(image.getBuffer, {context: image})(Jimp.MIME_JPEG);
+					}).then(function(buffer) {
+						res.status(200).send('' + bytesToWordCount(buffer.length));
+					}).catch(function(err) {
+						res.status(400).send(err.message);
+					});
 				}
-				Jimp.read(data)
-				.then(function(image) {
-					//read the file, rewrite it as jpeg with fixed quality, report the image size
-					image.quality(imageQuality);
-					return Promise.promisify(image.getBuffer, {context: image})(Jimp.MIME_JPEG);
-				}).then(function(buffer) {
-					res.status(200).send('' + bytesToWordCount(buffer.length));
-				}).catch(function(err) {
-					res.status(400).send('Failed to read image: ' + err.message);
-				});
+				catch(err) {
+					next(err);
+				}
 			});
 			//file.on('end', function() {
 				//console.log('File [' + fieldname + '] Finished');

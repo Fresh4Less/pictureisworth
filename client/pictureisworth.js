@@ -15,12 +15,12 @@
 				contentType: false,
 				processData: false
 			}).done(function(data) {
-				submitLabel.find('span').text('Upload');
+				submitLabel.find('span').text('Evaluate');
 				setSpincounter.call($('#image-word-count')[0], parseInt(data))
 			}).fail(function(data) {
-				submitLabel.find('span').text('Upload');
+				submitLabel.find('span').text('Evaluate');
 				submitLabel.attr('disabled', false);
-				$('#image-upload-error').text('Error: ' + data.responseText);
+				$('#image-upload-error').text('Error: ' + data.responseText || 'upload failed');
 			});
 		});
 
@@ -41,6 +41,7 @@
 			submitLabel.css('visibility', 'visible');
 			submitLabel.attr('disabled', false);
 			$('#image-preview').attr('src', URL.createObjectURL(event.target.files[0]));
+			//setSpincounter.call($('#image-word-count'), 0);
 		});
 
 		$('.spincounter').each(initializeSpincounter);
