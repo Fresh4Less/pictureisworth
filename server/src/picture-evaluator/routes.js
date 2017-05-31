@@ -55,5 +55,6 @@ module.exports = function(options) {
 }
 
 function bytesToWordCount(bytes) {
-	return Math.floor(10*Math.pow(bytes, 1/2));
+	var x = bytes + 10000;
+	return Math.floor(10*Math.pow(x, 1/2)-100*Math.pow(x, 1/4));
 }
